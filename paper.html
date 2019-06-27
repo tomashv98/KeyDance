@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="paper.css">
+    <script src="paper.js"></script>
+    <script type="text/javascript" src="paper-full.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.js"></script>
+
+    <script type="text/paperscript" canvas="myCanvas">
+        var sound = new Howl({
+            src: ['sounds/bubbles.mp3']
+          });
+
+        var allCircles = [];
+        function onKeyDown(event) {
+            sound.play();
+            // When a key is pressed, set the content of the text item:
+            var maxPoint = new Point(view.size.width, view.size.length)
+            var randomPoint = Point.random();
+            var point = maxPoint * randomPoint;
+            var newCircle = new Path.Circle(point, 500);
+            newCircle.fillColor = "orange";
+            allCircles.push(newCircle);
+
+        };
+
+
+        function onFrame(event) {
+            for (var i = 0; i < allCircles.length; i++) {
+                allCircles[i].fillColor.hue += 1;
+                allCircles[i].scale(.9);
+            };
+        
+
+        }        
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" resize></canvas>
+</body>
+</html>
